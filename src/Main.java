@@ -11,14 +11,18 @@ public class Main {
 
         ArrayList<User> users = new ArrayList<>();
         users.add(new User("Суровый","Андрей","Андреевич","79009001122","admin@yandex.ru","admin1", "pass", "Администратор"));
-        users.add(new User("Дубовый","Евгений","Николаевич","79209031123","dyb@yandex.ru","guest1", "1111", "Пользователь"));
-        users.add(new User("Дубовый","Евгений","Николаевич","79209031123","dyb@yandex.ru","1", "1", "Администратор"));
+        users.add(new User("Дубовый","Евгений","Николаевич","7920905653","dyb@yandex.ru","guest1", "1111", "Пользователь"));
+        users.add(new User("Коргинина","Евгения","Алесеевна","79209061193","dyb@yandex.ru","1", "1", "Администратор"));
+        users.add(new User("Великий","Даниил","Константинович","79209031823","dyb@yandex.ru","2", "2", "Пользователь"));
         User currentUser= new User();
+
         boolean auth=true;
         while(auth) {
-            System.out.println("1 – Авторизироваться \n2 – Зарегистрироваться \n3-Выход");
-
-            switch (in.nextLine()) {
+            System.out.println("1 – Авторизироваться " +
+                    "\n2 – Зарегистрироваться " +
+                    "\n3-Выход");
+            String userType0 = in.nextLine();
+            switch (userType0) {
                 case "1": {
                     boolean nonunic;
                     do {
@@ -45,11 +49,13 @@ public class Main {
                         }
                         if (nonunic) {
                             System.out.println("Данные не верны");
-                            System.out.println("1 Повторить \n2 Вернуться в главное меню");
+                            System.out.println("1 Повторить " +
+                                    "\n2 Вернуться в главное меню");
+                            String userType4 = in.nextLine();
                             boolean stop;
                             do {
                                 stop = false;
-                                switch (in.nextLine()) {
+                                switch (userType4) {
                                     case "1":
                                         break;
                                     case "2":
@@ -111,47 +117,28 @@ public class Main {
             products.add(new Goods("Униженные и оскорбленные", "299р"));
             if (currentUser.getType().equals("Администратор")){
 
-
+//                String userType1 = in.nextLine();
             while (true) {
-                System.out.println("1 Добавить товар" +
+                System.out.println("-------------");
+                System.out.println("Меню администратора:" +
+                        "\n1 Добавить товар" +
                         "\n2 Удаление товара" +
                         "\n3 Просмотр информации о товаре" +
                         "\n4 Просмотр информации о пользователях" +
                         "\n5 Смена роли пользователю" +
                         "\n6 Выход");
+
                 switch (in.nextLine()) {
                     case "1":
                         products = addGood(products);
                         break;
                     case "2":
 // Удаление книги
-                        System.out.println("Введите id ");
-                        int book1 = Integer.parseInt(in.nextLine());
-                        for (Goods book : products) {
-                            if (book.getIdBook() == book1) {
-                                in.nextLine();
-                                System.out.println("1 Подтвердить удаление \n2 Отменить удаление");
-                                boolean stop2;
-                                do {
-                                    stop2 = false;
-                                    switch (in.nextLine()) {
-                                        case "1":
-                                            products.remove(book);
-                                            break;
-                                        case "2":
-                                            break;
-                                        default:
-                                            stop2 = true;
-                                    }
-                                } while (stop2);
-                            }
-                        }
+                        products = deleteGood(products);
                         break;
                     case "3":
 // 3Просмотр информации о товаре
-                        for (Goods book : products) {
-                            System.out.println(book);
-                        }
+                        products =reviewGood(products);
                         break;
                     case "4":
 // 4  Просмотр информации о пользователях
@@ -166,12 +153,14 @@ public class Main {
                         for (User loginId : users) {
                             if (loginId.getLogin().equals(loginId1)) {
 
-                                System.out.println("1 Сделать администратором? \n2 Сделать пользователем? \n3 Отменить");
-                                String userType = in.nextLine();
+                                System.out.println("1 Сделать администратором? " +
+                                        "\n2 Сделать пользователем? " +
+                                        "\n3 Отменить");
+                                String userType2 = in.nextLine();//без бага
                                 boolean stop5;
                                 do {
                                     stop5 = false;
-                                    switch (userType) {
+                                    switch (userType2) {
                                         case "1":
                                             loginId.setType("Администратор");
                                             break;
@@ -194,16 +183,25 @@ public class Main {
         }
         else {
                 while (true) {
-                    System.out.println("1 Просмотр информации о товаре" +
+                    System.out.println("Меню пользователя:" +
+                            "\n1 Просмотр информации о товаре" +
                             "\n2 Выход");
-                    in.nextLine();
+
+                    String userType3 = in.nextLine();
+                    switch (userType3) {
+                        case "1":
+                            products =reviewGood(products);
+                            break;
+                        case "2":
+                            return;
+                    }
                 }
 
         }
 
 
         }
-    public static ArrayList addGood(ArrayList products1) {
+    public static ArrayList<Goods> addGood(ArrayList<Goods> products1) {
         Scanner in= new Scanner(System.in);
         Goods product = new Goods();
         System.out.println("Введите наименование книги");
@@ -211,13 +209,13 @@ public class Main {
 
         System.out.println("Введите цену");
         product.setPrice(in.nextLine());
-
-        in.nextLine();
         System.out.println("1 Подтвердить добавление новой книги\n2 Отменить добавление новой книги");
+        String userType3 = in.nextLine();
+
         boolean stop;
         do{
             stop=false;
-            switch (in.nextLine()){
+            switch (userType3){
                 case "1":
                     products1.add(product);
                     break;
@@ -228,5 +226,41 @@ public class Main {
         }while(stop);
         return products1;
     }
+    public static ArrayList<Goods> deleteGood(ArrayList<Goods> products2) {
+        Scanner in= new Scanner(System.in);
+
+        System.out.println("Введите id ");
+        int book1 = Integer.parseInt(in.nextLine());
+        for (Goods book : products2) {
+            if (book.getIdBook() == book1) {
+                in.nextLine();
+                System.out.println("1 Подтвердить удаление \n2 Отменить удаление");
+                boolean stop2;
+                do {
+                    stop2 = false;
+                    switch (in.nextLine()) {
+                        case "1":
+                            products2.remove(book);
+                            break;
+                        case "2":
+                            break;
+                        default:
+                            stop2 = true;
+                    }
+                } while (stop2);
+                break;
+            }
+        }
+        return products2;
     }
+    public static ArrayList<Goods> reviewGood(ArrayList<Goods> products3) {
+    // 3 Просмотр информации о товаре
+        Scanner in= new Scanner(System.in);
+        System.out.println("Список книг:");
+        for (Goods book : products3) {
+        System.out.println(book);
+    }
+        return products3;
+}
+}
 
