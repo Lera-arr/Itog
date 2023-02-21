@@ -11,15 +11,17 @@ public class User {
     private String telephone;
     private String email;
 
+    public User() {
+    }
 
-    public User()
-    {}
     public User(String login, String pass, String type) {
         this.login = login;
         this.pass = pass;
         this.type = type;
     }
-    public User(String surname, String name,String patronymic,String telephone,String email,String login, String pass, String type) {
+
+    public User(String surname, String name, String patronymic, String telephone, String email, String login,
+            String pass, String type) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
@@ -35,10 +37,10 @@ public class User {
     }
 
     public boolean setLogin(String login) {
-        if(login.matches("[A-Za-z0-9]*") && !login.isEmpty()){
-           this.login = login;
+        if (login.matches("[A-Za-z0-9]*") && !login.isEmpty()) {
+            this.login = login;
             return true;
-        } else{
+        } else {
             System.out.println("Введите данные на латинице");
             return false;
         }
@@ -89,10 +91,10 @@ public class User {
     }
 
     public boolean setTelephone(String telephone) {
-        if(telephone.matches("\\+7|7|8\\d{10}")){
+        if (telephone.matches("\\+7|7|8\\d{10}")) {
             this.telephone = telephone;
             return true;
-        } else{
+        } else {
             System.out.println("Ошибка некоректные данные");
             return false;
         }
@@ -106,22 +108,29 @@ public class User {
 
         this.email = email;
     }
+
     public boolean equalsLogin(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         User user = (User) o;
 
         return Objects.equals(login, user.login);
     }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         User user = (User) o;
 
-        if (!Objects.equals(login, user.login)) return false;
+        if (!Objects.equals(login, user.login))
+            return false;
         return Objects.equals(pass, user.pass);
     }
 
@@ -134,10 +143,8 @@ public class User {
 
     @Override
     public String toString() {
-        return getType()+" "+ getLogin()+" "+getPass()+" "+getEmail()+" "+getName()+" "+ getPatronymic()+" "+ getSurname()+" "+getTelephone();
+        return getType() + " " + getLogin() + " " + getPass() + " " + getEmail() + " " + getName() + " "
+                + getPatronymic() + " " + getSurname() + " " + getTelephone();
     }
 
-
 }
-
-

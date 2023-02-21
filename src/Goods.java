@@ -1,15 +1,15 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Goods {
-    transient private static AtomicInteger idCounter=new AtomicInteger(0);
+    transient private static AtomicInteger idCounter = new AtomicInteger(0);
     private int idBook;
     private String nameProduct;
     private String price;
 
-    public Goods()
-    {
+    public Goods() {
         this.idBook = idCounter.addAndGet(1);
     }
+
     public Goods(String nameProduct, String price) {
         this.idBook = idCounter.addAndGet(1);
         this.nameProduct = nameProduct;
@@ -43,6 +43,6 @@ public class Goods {
 
     @Override
     public String toString() {
-        return getIdBook()+" "+getNameProduct()+" "+ getPrice();
+        return getIdBook() + " " + getNameProduct() + " " + getPrice();
     }
 }
