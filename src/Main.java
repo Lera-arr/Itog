@@ -22,9 +22,9 @@ public class Main {
 
         boolean auth = true;
         while (auth) {
-            System.out.println("1 – Авторизироваться " +
-                    "\n2 – Зарегистрироваться " +
-                    "\n3-Выход");
+            System.out.println("1 Авторизироваться " +
+                    "\n2 Зарегистрироваться " +
+                    "\n3 Выход");
             String userType0 = in.nextLine();
             switch (userType0) {
                 case "1": {
@@ -169,9 +169,11 @@ public class Main {
                                     switch (userType2) {
                                         case "1":
                                             loginId.setType("Администратор");
+                                            System.out.println("Выполнено");
                                             break;
                                         case "2":
                                             loginId.setType("Пользователь");
+                                            System.out.println("Выполнено");
                                             break;
                                         case "3":
                                             break;
@@ -201,9 +203,7 @@ public class Main {
                         return;
                 }
             }
-
         }
-
     }
 
     public static ArrayList<Goods> addGood(ArrayList<Goods> products1) {
@@ -223,6 +223,7 @@ public class Main {
             switch (userType3) {
                 case "1":
                     products1.add(product);
+                    System.out.println("Книга добавлена: " +product);
                     break;
                 case "2":
                     break;
@@ -248,6 +249,7 @@ public class Main {
                     switch (in.nextLine()) {
                         case "1":
                             products2.remove(book);
+                            System.out.println("Книга удалена: "+book);
                             break;
                         case "2":
                             break;
